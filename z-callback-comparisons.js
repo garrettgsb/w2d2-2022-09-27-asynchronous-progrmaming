@@ -10,7 +10,23 @@
 
 function doAThing();
 setTimeout(doAThing, 1000);
-document.addEventListener('click', doAThing);
-app.get('/about', doAThing);
+
+
+function doAThing(event);
+button.addEventListener('click', doAThing);
+
+
+
+function doAThing(request, response);
+app.get('/about', doAThing); // https://myapp.com/about
+
+
+
+
+function doAThing(error, theDataInTheFile);
 fs.readFile('./some-file.txt', { encoding: 'utf8' }, doAThing);
+
+
+
+function doAThing(queryResult);
 pg.query('SELECT * FROM users', doAThing);

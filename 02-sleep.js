@@ -3,9 +3,7 @@
 
 function sleep(timeInMs) {
   const endTime = Date.now() + timeInMs;
-  while (Date.now() < endTime) {
-    continue;
-  }
+  while (Date.now() < endTime) continue;
 }
 
 

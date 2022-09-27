@@ -6,11 +6,16 @@
   }
 
   for (let i = 0; i < 100; i++) {
-    countTimesRan();
+    if (shouldRun(0.9)) {
+      countTimesRan()
+    };
+  }
+  function shouldRun(probability) {
+    return Math.random() > probability
   }
 }
 
-// if Math.random()...
+
 {
   let count = 0;
   function countTimesRan() {
@@ -18,44 +23,12 @@
   }
 
   for (let i = 0; i < 100; i++) {
-    if (Math.random() < 0.1) {
-      countTimesRan();
-    }
+    maybeRun(0.9, countTimesRan);
   }
 }
 
-
-// shouldRun: It would be much nicer in a function
-{
-  let count = 0;
-  function countTimesRan() {
-    console.log(`countTimesRan has run ${++count} times!`);
-  }
-
-  function shouldRun() { return Math.random() < 0.1 }
-
-  for (let i = 0; i < 100; i++) {
-    if (shouldRun()) {
-      countTimesRan();
-    }
-  }
-}
-
-
-// maybeRun: There's the callback
-{
-  let count = 0;
-  function countTimesRan() {
-    console.log(`countTimesRan has run ${++count} times!`);
-  }
-
-  function maybeRun(fn) {
-    if (Math.random < 0.1) {
-      fn();
-    }
-  }
-
-  for (let i = 0; i < 100; i++) {
-    maybeRun(countTimesRan);
+function maybeRun(probability, fn) {
+  if (Math.random() > probability) {
+    fn();
   }
 }
