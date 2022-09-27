@@ -19,17 +19,15 @@ const fs = require('fs');
 const path = './counter';
 const options = { encoding: 'utf8' };
 
-fs.readFile(path, options, (readError, oldCount) =>
-  handleInitialRead(
-    readError,
-    oldCount,
-    (oldCount) => handleWrite(handleFinalRead)
-));
 
-function handleInitialRead(readError, oldCount, fn) {
-  if (readError) { return console.log('Ahh hell. Read error.') }
-  console.log('Old count:', oldCount);
-  return fn(oldCount);
+handleInitialRead(oldCount => handleWrite(oldCount, handleFinalRead));
+
+function handleInitialRead(fn) {
+  fs.readFile(path, options, (readError, oldCount) => {
+    if (readError) { return console.log('Ahh hell. Read error.') }
+    console.log('Old count:', oldCount);
+    return fn(oldCount);
+  });
 }
 
 function handleWrite(oldCount, fn) {
@@ -50,7 +48,11 @@ function incrementFileValue(value) {
   return String(Number(value) + 1)
 }
 
+
+/*
+With Promises, it's much nicer :)
 fs.readFile(path, options)
   .then(handleInitialRead)
   .then(handleWrite)
   .then(handleFinalRead);
+*/
